@@ -4,6 +4,34 @@ import fetch from 'isomorphic-fetch';
 
 const baseURL = typeof window === 'undefined' ? process.env.BASE_URL || (`http://localhost:${(process.env.PORT || 8000)}`) : '';
 
+export function quandl(data){
+  console.log(data);
+  return {
+    type : ActionTypes.QUANDL_REQUEST,
+    source : data.source,
+    table : data.table
+  };
+}
+
+export function quandlRequest(req){
+
+  let { databaseCode, datasetCode, date, dataLabel } = req;
+  return((dispatch) => {
+    fetch(`${baseURL}/api/getData`, {
+      method: 'post',
+      body: JSON.stringify({
+        databaseCode,
+        datasetCode, 
+        date,
+        dataLabel
+      }),
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+    }).then((res) => res.json()).then(res => dispatch(quandl(res)));
+  });
+}
+
 export function addPost(post) {
   return {
     type: ActionTypes.ADD_POST,

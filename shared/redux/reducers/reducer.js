@@ -4,6 +4,11 @@ const initialState = { posts: [], selectedPost: null };
 
 const postReducer = (state = initialState, action) => {
   switch (action.type) {
+    case ActionTypes.QUANDL_REQUEST :
+      console.log(action);
+      return {
+        quandl : action.source
+      };
     case ActionTypes.ADD_POST :
       return {
         posts: [{

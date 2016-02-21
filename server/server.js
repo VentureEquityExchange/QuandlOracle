@@ -28,10 +28,10 @@ import { match, RouterContext } from 'react-router';
 // Import required modules
 import routes from '../shared/routes';
 import { fetchComponentData } from './util/fetchData';
-import posts from './routes/post.routes';
+import RoutesIndex from './routes/index';
 import dummyData from './dummyData';
 import serverConfig from './config';
-
+import contractUtils from './util/contractUtils';
 // MongoDB Connection
 mongoose.connect(serverConfig.mongoURL, (error, connection) => {
   if (error) {
@@ -47,7 +47,7 @@ mongoose.connect(serverConfig.mongoURL, (error, connection) => {
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 app.use(Express.static(path.resolve(__dirname, '../static')));
-app.use('/api', posts);
+app.use('/api', RoutesIndex);
 
 // Render Initial HTML
 const renderFullPage = (html, initialState) => {
