@@ -5,34 +5,11 @@ const fs = require('fs');
 const Web3 = require('web3');
 
 export let web3 = Promise.promisifyAll(new Web3());
-export let gethSocket;
+export let gethSocket = '/root/.ethereum/geth.ipc';
 
-// Determine Socket Path
-
-function socketPath(next){
-	if(process.platform == 'darwin'){
-		let user = '';
-		let appdir = path.dirname(require.main.filename);
-		fs.readdir('/Users', (err, users) => {
-			if(err) console.log(err);
-			for (let i = users.length - 1; i >= 0; i--) {
-				let user = new RegExp(users[i]);
-				if(user.test(appdir)){
-					user = users[i];
-					next('/Users/'+user+'/Library/Ethereum/geth.ipc');
-				}
-			};
-		});
-	};
-};
-
-socketPath((path) => {
-	gethSocket = path;
-
-  // Ethereum node should already be running, otherwise set a timeout
-  web3.setProvider(new web3.providers.IpcProvider(gethSocket, net));
-});
-
+setTimeout(() => {
+    web3.setProvider(new web3.providers.IpcProvider(gethSocket, net));
+}, 2000)
 // Geth Socket Connection
 
 function gethIPC(payload, next){

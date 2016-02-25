@@ -87,9 +87,9 @@ function DeployQuandlOracle(){
 
 // DeployQuandlOracle();
 
-LoadContracts().then((contracts) => {
-  console.log(contracts);
-  console.log(QuandlOracle);
-}).catch((error) => {
-  console.log(error);
-});
+// LoadContracts().then((contracts) => {
+//   console.log(contracts);
+//   console.log(QuandlOracle);
+// }).catch((error) => {
+//   console.log(error);
+// });

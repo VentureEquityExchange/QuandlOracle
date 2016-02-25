@@ -4,6 +4,3 @@ npm-debug.log
 .idea/
 dump.rdb
 .vscode/
-public/*
-static/dist
-static/css/app.min.css
